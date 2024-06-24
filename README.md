@@ -11,6 +11,9 @@
 <p>Install dependencies</p>
 <code>pip install -r requirements.txt</code>
 
+<h2>Initial adjustments</h2>
+<p><strong>This is important:</strong> Before running the tool you need to check the website used for authentication and analyze the HTML input elements related to authentication. Generally, those will be 2 inputs for username and password and a submit button, but different application might as well include radio buttons, 2 step verification process, etc. Once done, please adjust the run function in main.py file accordingly. In case you're new using Selenium, here's the documentation: <a>https://selenium-python.readthedocs.io/locating-elements.html</a></p>
+
 <h2>Usage</h2>
 <p>Basic example</p>
 <code>python main.py -u {username} -p {password} -t {toolname} --authurl https://example-login-page.com</code>
