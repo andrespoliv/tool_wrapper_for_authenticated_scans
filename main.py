@@ -22,6 +22,9 @@ def nuclei_cookie_processor(raw_data):
 
             result =  result + raw_data[index]["name"] + "=" + raw_data[index]["value"] + ";"
         
+        if "nt" in os.name: 
+            result = result.replace("|", "'|'")
+        
         result = result + '"'
 
     except Exception as e:
@@ -71,13 +74,13 @@ def run(username, password, url):
         driver.get(url)
         
         # Login process
-        username_input = driver.find_element(By.ID, "txtUser")
-        username_input.send_keys(username)
-        password_input = driver.find_element(By.ID, "txtPassword")
-        password_input.send_keys(password)
+        # username_input = driver.find_element(By.ID, "txtUser")
+        # username_input.send_keys(username)
+        # password_input = driver.find_element(By.ID, "txtPassword")
+        # password_input.send_keys(password)
 
-        submit_button = driver.find_element(By.ID, "cmdSelect")
-        submit_button.click()
+        # submit_button = driver.find_element(By.ID, "cmdSelect")
+        # submit_button.click()
 
         result = driver.get_cookies()
 
@@ -94,9 +97,9 @@ def scan_url_handler(scan_url, default_url, tool):
             result = scan_url if scan_url else default_url
         else:
             if not scan_url:
-                result = default_url
+                result = f"-u {default_url}"
             else:
-                if ".txt" in scan_url:
+                if (".txt" in scan_url) and (not ".com" in scan_url):
                     result = f"-l {scan_url}"
                 else:
                     result = f"-u {scan_url}"
